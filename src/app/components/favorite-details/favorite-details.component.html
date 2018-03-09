@@ -1,0 +1,16 @@
+<div class="container">
+  <h3>Favorites</h3>
+  <hr />
+  <div class="row">
+      <div class="col-sm-4"  *ngFor="let country of countries">
+        <div class="tile-stats">
+          <div class="icon tile-icon"><i class="fa fa-font-awesome"></i></div>
+          <h4>{{ country.name }}</h4>
+          <p>{{ country.language }}</p>
+          <div class="pull-left">
+            <div class="icon favorite" (click)="toggleFavorites(country.name)"><i class="{{ favoritesArr.indexOf(country.name) != -1 ? 'fa fa-heart' : 'fa fa-heart-o' }}"></i></div>
+         </div>
+        </div>
+      </div>
+  </div>
+</div>  

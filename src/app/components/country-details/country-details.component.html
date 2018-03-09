@@ -1,0 +1,78 @@
+
+<div class="container">
+  <h3>{{currentCountry.name}}
+      <div class="pull-right">
+          <div class="icon favorite" (click)="toggle()"><i class="{{ favorite ? 'fa fa-heart' : 'fa fa-heart-o' }}"></i></div>
+      </div>
+  </h3>
+  
+  <hr />
+  <small class="highlight">COUNTRY INFORMATION</small>
+  <div class="row">
+      <div class="col-sm-9">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="tile-stats">
+                <div class="icon tile-icon"><i class="fa fa-globe"></i></div>
+                <p>Capital</p>
+                <h4>{{currentCountry.capital}}</h4>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="tile-stats">
+                <div class="icon tile-icon"><i class="fa fa-universal-access"></i></div>
+                <p>Subregion</p>
+                <h4>{{currentCountry.subregion}}</h4>
+            </div>
+          </div>
+          <div class="col-sm-6">
+              <div class="tile-stats">
+                  <div class="icon tile-icon"><i class="fa fa-snowflake-o"></i></div>
+                  <p>Region</p>
+                  <h4>{{currentCountry.region}}</h4>
+              </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="tile-stats">
+                    <div class="icon tile-icon"><i class="fa fa-industry"></i></div>
+                    <p>Area</p>
+                    <h4>{{currentCountry.area}}</h4>
+                </div>
+              </div>
+         </div> 
+        </div> 
+    <div class="col-sm-3">
+        <div class="tile-stats" style="height: 243px;">
+            <p>Population</p>
+            <h4>{{currentCountry.population}}</h4>
+            <div class="icon tile-icon"><i class="fa fa-street-view"></i></div>
+        </div>
+    </div>
+  </div>
+
+  <hr />
+  <small class="highlight">CURRENCIES</small>
+  <div class="form-group">
+      <label>Name: </label> 
+      <label>{{currentCountry.currency}}</label>  
+  </div>
+  <div class="form-group">
+      <label>Symbol: </label> 
+      <label>{{currentCountry.currencySymbol}}</label> 
+  </div>
+  <hr />
+  <small class="highlight">LOCATION</small>
+
+    <!--<agm-map [latitude]="convertString(currentCountry.location[0].latitude)" [longitude]="convertString(currentCountry.location[0].longitude)">
+      <agm-marker [latitude]="convertString(currentCountry.location[0].latitude)" [longitude]="convertString(currentCountry.location[0].longitude)"></agm-marker>
+    </agm-map>-->
+
+    <agm-map [latitude]="currentCountry.location[0].latitude" [longitude]="currentCountry.location[0].longitude">
+      <agm-marker [latitude]="currentCountry.location[0].latitude" [longitude]="currentCountry.location[0].longitude">
+          <agm-info-window>{{currentCountry.name}}</agm-info-window>
+      </agm-marker>
+    </agm-map>
+    <!--<agm-map [latitude]="47.7511" [longitude]="120.7401">
+        <agm-marker [latitude]="47.7511" [longitude]="120.7401"></agm-marker>
+    </agm-map>-->
+</div>

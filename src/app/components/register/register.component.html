@@ -1,0 +1,34 @@
+<div class="back">
+    <div class="div-center">
+      <div class="content">
+        <h3>Welcome to find my country</h3>
+        <small>A simple country information webapp</small>
+        <hr />
+        
+        <div [hidden]="!submitted || !invalidEmail" class="alert alert-danger">
+          Email is invalid
+        </div>
+        <div [hidden]="!submitted || !passwordMismatch" class="alert alert-danger">
+          <p>Password and Confirm password doesn't match</p>
+        </div>
+        <div [hidden]="!submitted || !customError" class="alert alert-danger">
+          <p>{{ customMsg }}</p>
+        </div>
+        <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" placeholder="email" name="email" ngModel required #email="ngModel" (ngModelChange)="resetSubmit()">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" placeholder="password" name="password" ngModel required  #password="ngModel" (ngModelChange)="resetSubmit()">
+          </div>
+          <div class="form-group">
+              <label for="confirmpassword">Confirm Password</label>
+              <input type="password" class="form-control" placeholder="confirm password" name="cpassword" ngModel required  #cpassword="ngModel" (ngModelChange)="resetSubmit()">
+            </div>
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="!registerForm.form.valid">Create Account</button>
+        </form>  
+      </div>
+    </div>
+</div>

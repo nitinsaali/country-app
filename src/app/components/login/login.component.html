@@ -1,0 +1,22 @@
+<div class="back">
+    <div class="div-center">
+      <div class="content">
+        <h3>Find My Country</h3>
+        <hr />
+        <div [hidden]="!submitted || !customError" class="alert alert-danger">
+          {{ customMsg }}
+        </div>
+        <form #loginForm="ngForm" (ngSubmit)="signIn(loginForm)">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" placeholder="Email" name="email" ngModel required #email="ngModel" (ngModelChange)="resetSubmit()">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" placeholder="Password" name="password" ngModel required  #password="ngModel"(ngModelChange)="resetSubmit()">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.form.valid">Login</button>
+        </form>  
+      </div>
+    </div>
+    </div>

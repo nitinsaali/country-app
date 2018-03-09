@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+$fa-font-path: "../node_modules/font-awesome/fonts";
+@import "../node_modules/font-awesome/scss/font-awesome.scss";
+@import '~roboto-fontface/css/roboto/roboto-fontface.css';
+
+body {
+    font-family: Roboto;
+}
+
+.tile-stats{
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background: #303641;
+  color:#fff;
+}
+.tile-stats .tile-icon {
+  color: rgba(151, 142, 142, 0.3);
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+  z-index: 1;
+}
+.tile-stats .tile-icon i {
+  font-size: 100px;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.favorite i:hover{
+  cursor: pointer;
+}
+small.highlight{font-weight: bold;}
+
+.back {
+    background: #e2e2e2;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .div-center {
+    width: 400px;
+    height: 400px;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    padding: 1em 2em;
+    border-bottom: 2px solid #ccc;
+    display: table;
+  }
+  
+  div.content {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
