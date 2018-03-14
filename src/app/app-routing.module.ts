@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginComponent } from './components/login/login.component';
@@ -12,26 +13,32 @@ const routes: Routes = [
   {
     path: 'start-screen',
     component: StartScreenComponent,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'country-list',
     component: CountryListComponent,
+    canActivate: [ AuthGuard ]
   },
   {
-    path: 'country-details/:name',
+    path: 'country-details/:code',
     component: CountryDetailsComponent,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'favorite-details',
     component: FavoriteDetailsComponent,
+    canActivate: [ AuthGuard ]
   },
   {
     path: '',

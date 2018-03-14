@@ -15,27 +15,28 @@ export class FavoriteDetailsComponent implements OnInit {
   constructor(private countryFetcherService: CountryFetcherService, private authService: AuthenticationService) { }
 
   ngOnInit() {
-    this.countries = this.countryFetcherService.getCountries();
-
+    
+    this.countryFetcherService.getCountries()
+      .subscribe((countries) => {
+        this.countries = countries;
+    })
     let loggedUser = JSON.parse(this.authService.getLoggedInUser());
     
     this.favoritesArr = loggedUser.favorites;
-    console.log(loggedUser.favorites);
   }
   
-  toggleFavorites(countryName) {
-    console.log(countryName);
+  toggleFavorites(countryCode) {
     let favorite;
-    let count = this.favoritesArr.filter(item => item == countryName).length;
+    let count = this.favoritesArr.filter(item => item == countryCode).length;
     if(count == 0) {
       favorite = true;
-      this.favoritesArr.push(countryName);
+      this.favoritesArr.push(countryCode);
     } else {
       favorite = false;
-      var index = this.favoritesArr.indexOf(countryName);
+      var index = this.favoritesArr.indexOf(countryCode);
       this.favoritesArr.splice(index, 1);
     }
 
-    this.authService.setFavorites(countryName, favorite);
+    this.authService.setFavorites(countryCode, favorite);
    }
 }

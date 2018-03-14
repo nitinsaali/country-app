@@ -1,6 +1,6 @@
 
 <div class="container">
-  <h3>{{currentCountry.name}}
+  <h3>{{currentCountry?.name}}
       <div class="pull-right">
           <div class="icon favorite" (click)="toggle()"><i class="{{ favorite ? 'fa fa-heart' : 'fa fa-heart-o' }}"></i></div>
       </div>
@@ -15,28 +15,28 @@
             <div class="tile-stats">
                 <div class="icon tile-icon"><i class="fa fa-globe"></i></div>
                 <p>Capital</p>
-                <h4>{{currentCountry.capital}}</h4>
+                <h4>{{currentCountry?.capital ? currentCountry?.capital : "NA"}}</h4>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="tile-stats">
                 <div class="icon tile-icon"><i class="fa fa-universal-access"></i></div>
                 <p>Subregion</p>
-                <h4>{{currentCountry.subregion}}</h4>
+                <h4>{{currentCountry?.subregion ? currentCountry?.subregion : "NA"}}</h4>
             </div>
           </div>
           <div class="col-sm-6">
               <div class="tile-stats">
                   <div class="icon tile-icon"><i class="fa fa-snowflake-o"></i></div>
                   <p>Region</p>
-                  <h4>{{currentCountry.region}}</h4>
+                  <h4>{{currentCountry?.region ? currentCountry?.region : "NA"}}</h4>
               </div>
             </div>
             <div class="col-sm-6">
                 <div class="tile-stats">
                     <div class="icon tile-icon"><i class="fa fa-industry"></i></div>
                     <p>Area</p>
-                    <h4>{{currentCountry.area}}</h4>
+                    <h4>{{currentCountry?.area ? currentCountry?.area : "NA"}}</h4>
                 </div>
               </div>
          </div> 
@@ -44,7 +44,7 @@
     <div class="col-sm-3">
         <div class="tile-stats" style="height: 243px;">
             <p>Population</p>
-            <h4>{{currentCountry.population}}</h4>
+            <h4>{{currentCountry?.population ? currentCountry?.population : "NA"}}</h4>
             <div class="icon tile-icon"><i class="fa fa-street-view"></i></div>
         </div>
     </div>
@@ -53,26 +53,20 @@
   <hr />
   <small class="highlight">CURRENCIES</small>
   <div class="form-group">
-      <label>Name: </label> 
-      <label>{{currentCountry.currency}}</label>  
+      <label>Name: </label>
+      <label>{{currentCountry?.currencies[0].code}}</label>  
   </div>
   <div class="form-group">
       <label>Symbol: </label> 
-      <label>{{currentCountry.currencySymbol}}</label> 
+      <label>{{currentCountry?.currencies[0].symbol}}</label> 
   </div>
   <hr />
   <small class="highlight">LOCATION</small>
-
-    <!--<agm-map [latitude]="convertString(currentCountry.location[0].latitude)" [longitude]="convertString(currentCountry.location[0].longitude)">
-      <agm-marker [latitude]="convertString(currentCountry.location[0].latitude)" [longitude]="convertString(currentCountry.location[0].longitude)"></agm-marker>
-    </agm-map>-->
-
-    <agm-map [latitude]="currentCountry.location[0].latitude" [longitude]="currentCountry.location[0].longitude">
-      <agm-marker [latitude]="currentCountry.location[0].latitude" [longitude]="currentCountry.location[0].longitude">
+  <div *ngIf="currentCountry?.latlng">
+       <agm-map [latitude]="currentCountry?.latlng[0]" [longitude]="currentCountry?.latlng[1]">
+      <agm-marker [latitude]="currentCountry?.latlng[0]" [longitude]="currentCountry?.latlng[1]">
           <agm-info-window>{{currentCountry.name}}</agm-info-window>
       </agm-marker>
     </agm-map>
-    <!--<agm-map [latitude]="47.7511" [longitude]="120.7401">
-        <agm-marker [latitude]="47.7511" [longitude]="120.7401"></agm-marker>
-    </agm-map>-->
+  </div>
 </div>

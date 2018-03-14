@@ -20,22 +20,22 @@ export class CountryDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    const countryName = this.route.snapshot.paramMap.get('name');
-
-    this.countryFetcherService.getCountry(countryName)
-      .subscribe((country) => {
-        this.currentCountry = country;  
-    })
-    let loggedUser = JSON.parse(this.authService.getLoggedInUser());
     
-    let count = loggedUser.favorites.filter(x => x == this.currentCountry.name).length;
-    if(count > 0) {
-      this.favorite = true;
-    } 
+    const countryCode = this.route.snapshot.paramMap.get('code');
+    
+    this.countryFetcherService.getCountry(countryCode)
+      .subscribe((country: Country) => {
+        this.currentCountry = country;  
+        let loggedUser = JSON.parse(this.authService.getLoggedInUser());
+        let count = loggedUser.favorites.filter(x => x == this.currentCountry.alpha3Code).length;
+        if(count > 0) {
+          this.favorite = true;
+        }
+    }) 
   }
 
   toggle() {
    this.favorite = !this.favorite;
-   this.authService.setFavorites(this.currentCountry.name, this.favorite);
+   this.authService.setFavorites(this.currentCountry.alpha3Code, this.favorite);
   }
 }

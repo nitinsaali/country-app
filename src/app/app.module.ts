@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 // Routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -15,8 +16,8 @@ import { FavoriteDetailsComponent } from './components/favorite-details/favorite
 
 // services
 import { AuthenticationService } from './services/authentication.service';
+import { AuthGuard } from './guards/auth.guard';
 import { CountryFetcherService } from './services/country-fetcher.service';
-
 
 @NgModule({
   declarations: [
@@ -32,11 +33,12 @@ import { CountryFetcherService } from './services/country-fetcher.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAM9BL_OdSLpn460K_0qZjszP_rdkBbzUo'
     })
   ],
-  providers: [AuthenticationService, CountryFetcherService],
+  providers: [AuthenticationService, CountryFetcherService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

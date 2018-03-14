@@ -1,13 +1,13 @@
 export interface Country {
-    id?: number,
     name: string,
-    language: string,
+    alpha3Code: string,
     capital: string,
     region: string,
     subregion: string,
-    area: string,
     population: string,
-    currency: string,
-    currencySymbol: string,
-    location: any[]
+    area: string,
+    currencies: any[],
+    languages: any[],
+    latlng: any[],
+    flag: string
 }

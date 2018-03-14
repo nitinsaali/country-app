@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from "rxjs/Rx";
+import { Observable, Subject, BehaviorSubject } from "rxjs/Rx";
 import { UserResponse } from '../interfaces/user-response';
 
 @Injectable()
 export class AuthenticationService {
   private userResponse: UserResponse;
-  public favoritesCount: number;
+  favoritesCount: number;
   public users = [];
- 
   /* this is to update favorite badge count 
      this is not working..needs to think on it 
   */
-  totalFavoritesCount:BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  
+  //favoritesCountChange: Subject<number> = new Subject<number>();
   constructor() { 
     this.users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
-    
+    //this.favoritesCount = 0;
+    // this.favoritesCountChange.subscribe((value) => {
+    //   this.favoritesCount = value
+    // });
   }
   
 
@@ -83,7 +84,7 @@ export class AuthenticationService {
     return sessionStorage.getItem("currentUser");
   }
 
-  setFavorites(name: string, value: boolean){
+  setFavorites(code: string, value: boolean){
 
     let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     
@@ -92,11 +93,11 @@ export class AuthenticationService {
     let localStorageUser = allUsers.find(item => item.email == currentUser.username);
 
      if(value) {
-        currentUser.favorites.push(name); 
-        localStorageUser.favorites.push(name);    
+        currentUser.favorites.push(code); 
+        localStorageUser.favorites.push(code);    
      } else {
-       currentUser.favorites = currentUser.favorites.filter(item => item !== name);
-       localStorageUser.favorites = localStorageUser.favorites.filter(item => item !== name);
+       currentUser.favorites = currentUser.favorites.filter(item => item !== code);
+       localStorageUser.favorites = localStorageUser.favorites.filter(item => item !== code);
      }
      sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
      
@@ -104,15 +105,16 @@ export class AuthenticationService {
 
      allUsers[index] = localStorageUser;
      localStorage.setItem("users", JSON.stringify(allUsers));
-     
+     //this.favoritesCount = currentUser.favorites.length;
+     //this.countChange.next(this.favoritesCount);
      //console.log(JSON.parse(sessionStorage.getItem("currentUser")));
-
      //console.log(JSON.parse(localStorage.getItem("users")));
   }
 
   getFavoritesCount() {
     let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-    this.favoritesCount = currentUser.favorites.length;
+    //this.favoritesCountChange.next(currentUser.favorites.length);
+    //this.favoritesCount = currentUser.favorites.length;
     return currentUser.favorites.length;
   }
 }

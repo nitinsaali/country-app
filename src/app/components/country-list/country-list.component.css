@@ -1,5 +1,5 @@
 .card{ flex-direction: row; }
-.card > .card-img { width: 100px; border-radius: 50%; margin:8px;}
+.card > .card-img { width: 100px; height:100px; border-radius: 50%; margin:8px;}
 .card > .card-block { margin:20px;}
 
 .col-centered {float: none; margin: 0 auto;}

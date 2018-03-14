@@ -4,13 +4,15 @@
           <div class="control-group">
               <label for="select-country">Search for country:</label>
               <select id="select-country" placeholder="Start typing here..."></select>
-            </div>  
+            </div>
         <hr />
-        <div class="card" [routerLink]="['/country-details', country.name]" *ngFor="let country of countriesToDisplay">
-          <img class="card-img" src="http://via.placeholder.com/100x100" alt="{{ country.name }}">
+        <div class="card" [routerLink]="['/country-details', country.alpha3Code]" *ngFor="let country of countriesToDisplay">
+          <img class="card-img" src="{{ country.flag }}" alt="{{ country.alpha3Code }}">
           <div class="card-block">
             <h5 class="card-title">{{ country.name }}</h5>
-            <p class="card-text">{{ country.language }}</p>
+            <span class="card-text" *ngFor="let language of country.languages">
+              {{ language.nativeName }} 
+            </span>
           </div>
         </div>
       </div>

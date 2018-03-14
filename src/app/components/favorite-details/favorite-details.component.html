@@ -3,12 +3,17 @@
   <hr />
   <div class="row">
       <div class="col-sm-4"  *ngFor="let country of countries">
-        <div class="tile-stats">
-          <div class="icon tile-icon"><i class="fa fa-font-awesome"></i></div>
-          <h4>{{ country.name }}</h4>
-          <p>{{ country.language }}</p>
+        <div class="tile-stats" title="{{ country.name }}">
+          <div class="icon tile-icon">
+            <img class="card-img" src="{{ country.flag }}" alt="{{ country.alpha3Code }}">
+          </div>
+          <h4>{{ country.alpha3Code }}</h4>
+          <span class="card-text" *ngFor="let language of country.languages">
+            {{ language.nativeName }} 
+          </span>
+          <p></p>
           <div class="pull-left">
-            <div class="icon favorite" (click)="toggleFavorites(country.name)"><i class="{{ favoritesArr.indexOf(country.name) != -1 ? 'fa fa-heart' : 'fa fa-heart-o' }}"></i></div>
+            <div class="icon favorite" (click)="toggleFavorites(country.alpha3Code)"><i class="{{ favoritesArr.indexOf(country.alpha3Code) != -1 ? 'fa fa-heart' : 'fa fa-heart-o' }}"></i></div>
          </div>
         </div>
       </div>
