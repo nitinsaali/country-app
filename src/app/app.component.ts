@@ -12,16 +12,13 @@ import { AuthenticationService } from './services/authentication.service';
 export class AppComponent implements OnInit { 
   public favoritesCount: number;
   constructor(private router: Router, private location: Location, authService: AuthenticationService) {
-    
-    // this.favoritesCount = authService.favoritesCount;
-    // authService.setFavorites.subscribe((value) => { 
-    //   this.favoritesCount = value; 
-    // });
-    //this.favoritesCount = authService.getFavoritesCount();
-  }
+    authService.getFavoritesCount()
+      .subscribe((count) => {
+        this.favoritesCount = count;  
+    });
 
+}
   ngOnInit() {
-      
   }
 
   logout() {

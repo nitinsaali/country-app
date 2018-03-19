@@ -1,24 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from "rxjs/Rx";
 import { UserResponse } from '../interfaces/user-response';
 
 @Injectable()
 export class AuthenticationService {
   private userResponse: UserResponse;
-  favoritesCount: number;
   public users = [];
-  /* this is to update favorite badge count 
-     this is not working..needs to think on it 
-  */
-  //favoritesCountChange: Subject<number> = new Subject<number>();
+  @Output() favoritesCountChange: EventEmitter<any> = new EventEmitter();
+ 
   constructor() { 
     this.users = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
-    //this.favoritesCount = 0;
-    // this.favoritesCountChange.subscribe((value) => {
-    //   this.favoritesCount = value
-    // });
   }
-  
 
   login(email: string, password: string) {
     let data = {
@@ -35,6 +27,7 @@ export class AuthenticationService {
         username: email,
         favorites: userFound[0]['favorites']
       };
+      this.favoritesCountChange.emit(userFound[0]['favorites'].length);
       sessionStorage.setItem("currentUser", JSON.stringify(returnResponse));
       return Observable.of(returnResponse);
     } else {
@@ -85,7 +78,7 @@ export class AuthenticationService {
   }
 
   setFavorites(code: string, value: boolean){
-
+    
     let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     
     let allUsers = JSON.parse(localStorage.getItem("users"));
@@ -102,19 +95,14 @@ export class AuthenticationService {
      sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
      
      var index = allUsers.indexOf(localStorageUser);
-
+    
+     this.favoritesCountChange.emit(currentUser.favorites.length);
+     
      allUsers[index] = localStorageUser;
      localStorage.setItem("users", JSON.stringify(allUsers));
-     //this.favoritesCount = currentUser.favorites.length;
-     //this.countChange.next(this.favoritesCount);
-     //console.log(JSON.parse(sessionStorage.getItem("currentUser")));
-     //console.log(JSON.parse(localStorage.getItem("users")));
   }
 
   getFavoritesCount() {
-    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-    //this.favoritesCountChange.next(currentUser.favorites.length);
-    //this.favoritesCount = currentUser.favorites.length;
-    return currentUser.favorites.length;
+    return this.favoritesCountChange;
   }
 }
